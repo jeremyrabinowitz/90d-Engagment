@@ -3,14 +3,10 @@ import requests
 from datetime import datetime, timedelta, timezone
 from dateutil import parser
 import isodate
-from dotenv import load_dotenv
-
-# Load environment variables from .env file for local development
-# On Render, these will be loaded from the environment
-load_dotenv()
 
 # CONFIG
-# You need to set these environment variables in your Render.com service
+# These environment variables will be loaded from the Render.com environment
+# as they are set in the Render UI.
 AIRTABLE_API_KEY = os.environ.get('AIRTABLE_API_KEY')
 AIRTABLE_BASE_ID = os.environ.get('AIRTABLE_BASE_ID')
 AIRTABLE_TABLE_NAME = 'Influencers'
@@ -184,6 +180,11 @@ def main():
     """
     print("Starting combined YouTube data update process...")
     
+    # Check if environment variables are set before proceeding
+    if not all([AIRTABLE_API_KEY, AIRTABLE_BASE_ID, YOUTUBE_API_KEY]):
+        print("❌ Error: Missing one or more environment variables (AIRTABLE_API_KEY, AIRTABLE_BASE_ID, YOUTUBE_API_KEY). Please set them in the Render UI.")
+        return
+
     # --- 1. Fetch Airtable Records ---
     records = get_airtable_records()
     if not records:
@@ -265,7 +266,4 @@ def main():
 
 
 if __name__ == "__main__":
-    if not all([AIRTABLE_API_KEY, AIRTABLE_BASE_ID, YOUTUBE_API_KEY]):
-        print("❌ Error: Missing one or more environment variables (AIRTABLE_API_KEY, AIRTABLE_BASE_ID, YOUTUBE_API_KEY). Please set them in your environment or .env file.")
-    else:
-        main()
+    main()
