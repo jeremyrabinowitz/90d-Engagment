@@ -1,4 +1,3 @@
 requests
-python-dotenv
 isodate
 python-dateutil
