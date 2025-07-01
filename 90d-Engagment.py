@@ -10,7 +10,7 @@ import isodate
 AIRTABLE_API_KEY = os.environ.get('AIRTABLE_API_KEY')
 AIRTABLE_BASE_ID = os.environ.get('AIRTABLE_BASE_ID')
 AIRTABLE_TABLE_NAME = 'Influencers'
-AIRTABLE_VIEW_NAME = 'RM Engagement Data'
+AIRTABLE_VIEW_NAME = '90d Engagement'
 YOUTUBE_API_KEY = os.environ.get('YOUTUBE_API_KEY')
 
 # API Endpoints
